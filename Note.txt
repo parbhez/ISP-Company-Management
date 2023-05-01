@@ -1,0 +1,7 @@
+After creating permissions, running the following commands should work as it worked for me.
+
+    1. php artisan cache:forget spatie.permission.cache
+
+then
+
+    2. php artisan cache:clear

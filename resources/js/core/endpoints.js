@@ -1,0 +1,9 @@
+export const Roles = '/roles';
+export const Users = '/users';
+export const Permissions = '/permissions';
+export const Packages = '/packages';
+export const Customers = '/customers';
+export const Bills = '/bills';
+export const Expenses = '/expenses';
+export const Accounts = '/accounts';
+export const Transactions = '/transactions';
