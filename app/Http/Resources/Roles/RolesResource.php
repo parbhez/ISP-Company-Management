@@ -18,7 +18,7 @@ class RolesResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'guard_name' => $this->guard_name,
-            'permissions' => $this->permissions->map(function($q) {
+            'userWisePermissions' => $this->permissions->map(function($q) {
                 //$q->permission = $q->pivot->id ?? [];
                 return $q;
             }),

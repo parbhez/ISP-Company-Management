@@ -61,7 +61,7 @@
                                 </td>
 
                                 <td>
-                                    <span v-for="(permission, key) in role.permissions" :key="key" class="badge badge-info" style="margin-bottom: 4px;margin-right: 5px;"> {{ permission.name }} </span>
+                                    <span v-for="(permission, key) in role.userWisePermissions" :key="key" class="badge badge-info" style="margin-bottom: 4px;margin-right: 5px;"> {{ permission.name }} </span>
                                 </td>
 
                                 <td class="align-middle">
@@ -391,7 +391,7 @@ export default {
                 this.loading = true;
                 this.preload = true;
                 let formId = parseInt(this.id);
-                // return console.log(this.form);
+                //return console.log(this.form);
 
                 let { data } = await axios[!this.id ? "post" : "put"](
                     !this.id ? `${Roles}` : `${Roles}/${formId}`,

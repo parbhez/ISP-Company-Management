@@ -34,10 +34,29 @@ const formActionMixin = {
             let [type, data] = payload;
             this.id = parseInt(data.id);
             this.form = data;
-            //console.log(data)
-            //console.log(this.form)
-            //console.log(this.form = data)
-            //console.log(this.form.permissions)
+            // console.log(this.form)
+
+            //Only for role edit
+            var selectedArr = [];
+            if (data.userWisePermissions) {
+                data.userWisePermissions.forEach(function(permission) {
+                    selectedArr.push(permission.id);
+                });
+
+                this.form.permissions = selectedArr;
+            }
+
+            //Only for User edit
+            var selectedRoleId = null;
+            if (data.userWiseRoles) {
+                data.userWiseRoles.forEach(function(role) {
+                    // console.log(role.id)
+                    selectedRoleId = role.id;
+                });
+                this.form.roles = selectedRoleId;
+            }
+            // console.log(this.form)
+            // console.log(this.form.permissions);
             // if Edit, then load the edit modal
             // if delete, delete the row targeted
             if (type == "edit") {

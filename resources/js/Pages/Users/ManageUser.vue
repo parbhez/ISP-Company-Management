@@ -66,7 +66,7 @@
                                 </td>
 
                                 <td>
-                                    <span v-for="(role, key) in user.roles" class="badge badge-info" style="margin-bottom: 4px;margin-right: 5px;"> {{ role.name }} </span>
+                                    <span v-for="(role, key) in user.userWiseRoles" class="badge badge-info" style="margin-bottom: 4px;margin-right: 5px;"> {{ role.name }} </span>
                                 </td>
 
 
@@ -210,9 +210,6 @@
                                                 <select name="" id="" v-model="form.roles" class="form-control">
                                                     <option selected disabled>Select Any One</option>
                                                     <option :value="role.id" v-for="(role, key) in all_roles" v-if="all_roles" :key="key">{{ role.name }}</option>
-
-
-
                                                 </select>
 
                                                 <!-- <multi-select

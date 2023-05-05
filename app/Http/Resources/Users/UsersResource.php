@@ -18,7 +18,7 @@ class UsersResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'roles' => $this->roles->map(function($q) {
+            'userWiseRoles' => $this->roles->map(function($q) {
                 return $q;
             }),
             'created_at' => $this->created_at,
