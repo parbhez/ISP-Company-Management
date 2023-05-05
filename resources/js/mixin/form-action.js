@@ -56,7 +56,6 @@ const formActionMixin = {
                 this.form.roles = selectedRoleId;
             }
             // console.log(this.form)
-            // console.log(this.form.permissions);
             // if Edit, then load the edit modal
             // if delete, delete the row targeted
             if (type == "edit") {

@@ -7,16 +7,22 @@
                         <div class="col-md-6">
                             <h5 class="card-title">All User</h5>
                         </div>
-                        <div class="col-md-6 text-ri text-right" v-for="(checkPermission, key) in getRoleWisePermissionList" :key="checkPermission.id">
+                        <div
+                            class="col-md-6 text-ri text-right"
+                            v-for="(
+                                checkPermission, key
+                            ) in getRoleWisePermissionList"
+                            :key="checkPermission.id"
+                        >
                             <div v-if="checkPermission.name == 'user.create'">
-                            <button
-                                :data-target="'#' + modal_name"
-                                data-toggle="modal"
-                                class="btn btn-primary mb-3 text-nowrap"
-                                @click.prevent="beforeOpen"
-                            >
-                                Add New User
-                            </button>
+                                <button
+                                    :data-target="'#' + modal_name"
+                                    data-toggle="modal"
+                                    class="btn btn-primary mb-3 text-nowrap"
+                                    @click.prevent="beforeOpen"
+                                >
+                                    Add New User
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -66,23 +72,43 @@
                                 </td>
 
                                 <td>
-                                    <span v-for="(role, key) in user.userWiseRoles" class="badge badge-info" style="margin-bottom: 4px;margin-right: 5px;"> {{ role.name }} </span>
-                                </td>
-
-
-
-                                <td class="align-middle">
-                                    <div v-for="(checkPermission, key) in getRoleWisePermissionList" :key="checkPermission.id">
-                                    <button
-                                        type="button"
-                                        v-if="checkPermission.name == 'user.edit'"
-                                        class="btn btn-primary btn-sm mr-2"
-                                        @click.prevent="
-                                            onClickHandleAction('edit', user)
+                                    <span
+                                        v-for="(
+                                            role, key
+                                        ) in user.userWiseRoles"
+                                        class="badge badge-info"
+                                        style="
+                                            margin-bottom: 4px;
+                                            margin-right: 5px;
                                         "
                                     >
-                                        Edit
-                                    </button>
+                                        {{ role.name }}
+                                    </span>
+                                </td>
+
+                                <td class="align-middle">
+                                    <div
+                                        v-for="(
+                                            checkPermission, key
+                                        ) in getRoleWisePermissionList"
+                                        :key="checkPermission.id"
+                                    >
+                                        <button
+                                            type="button"
+                                            v-if="
+                                                checkPermission.name ==
+                                                'user.edit'
+                                            "
+                                            class="btn btn-primary btn-sm mr-2"
+                                            @click.prevent="
+                                                onClickHandleAction(
+                                                    'edit',
+                                                    user
+                                                )
+                                            "
+                                        >
+                                            Edit
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -109,8 +135,8 @@
                 </div>
             </div>
 
-           <!--Role Modal start-->
-           <div
+            <!--Role Modal start-->
+            <div
                 class="modal fade"
                 :id="modal_name"
                 tabindex="-1"
@@ -195,7 +221,9 @@
                                                     type="text"
                                                     class="form-control"
                                                     placeholder="Confirm Password"
-                                                    v-model="form.password_confirmation"
+                                                    v-model="
+                                                        form.password_confirmation
+                                                    "
                                                 />
                                             </div>
                                         </div>
@@ -207,19 +235,33 @@
                                                     style="margin-bottom: 10px"
                                                     >Assign Roles</label
                                                 >
-                                                <select name="" id="" v-model="form.roles" class="form-control">
-                                                    <option selected disabled>Select Any One</option>
-                                                    <option :value="role.id" v-for="(role, key) in all_roles" v-if="all_roles" :key="key">{{ role.name }}</option>
+                                                <select
+                                                    name=""
+                                                    id=""
+                                                    v-model="form.roles"
+                                                    class="form-control"
+                                                >
+                                                    <option selected disabled>
+                                                        Select Any One
+                                                    </option>
+                                                    <option
+                                                        :value="role.id"
+                                                        v-for="(
+                                                            role, key
+                                                        ) in all_roles"
+                                                        v-if="all_roles"
+                                                        :key="key"
+                                                    >
+                                                        {{ role.name }}
+                                                    </option>
                                                 </select>
 
                                                 <!-- <multi-select
                                                     v-model="form.role_id" :options="all_roles" :multiple="true" placeholder="Please Select one" label="name" track-by="name"
                                                     >
                                                 </multi-select> -->
-
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </form>
@@ -273,8 +315,6 @@ export default {
             type: Object,
             default: {},
         },
-
-
     },
 
     data() {
@@ -306,15 +346,13 @@ export default {
     mounted() {
         this.fetchUsers();
         //console.log(this.all_users);
-        this.$store.dispatch('getRoleWisePermissionList');
+        this.$store.dispatch("getRoleWisePermissionList");
     },
 
-    watch: {
-
-    },
+    watch: {},
 
     computed: {
-        getRoleWisePermissionList(){
+        getRoleWisePermissionList() {
             return this.$store.getters.roleWisePermissionList;
         },
     },
