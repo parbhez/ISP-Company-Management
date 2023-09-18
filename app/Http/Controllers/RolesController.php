@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use Artisan;
 use Exception;
 use App\Models\User;
-// use App\Models\Role;
-// use App\Models\Permission;
+use App\Models\Role;
+use App\Models\Permission;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Filters\RoleFilter;
 use App\Http\Requests\RoleRequest;
 use Illuminate\Support\Facades\DB;
-use Spatie\Permission\Models\Role;
+// use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
-use Spatie\Permission\Models\Permission;
+// use Spatie\Permission\Models\Permission;
 use App\Http\Resources\Roles\RolesResource;
 
 class RolesController extends Controller
@@ -63,6 +63,7 @@ class RolesController extends Controller
                 ->latest()
                 ->paginate(request('limit') ?? 10)
         );
+
     }
 
 

@@ -6,9 +6,11 @@ use App\Http\Controllers\BillController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\MultiFormSubmitController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\SMSController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -25,6 +27,15 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+    /**
+    *our Account routes go in here
+    */
+    Route::resource('sms', SMSController::class)->except(['create', 'show', 'edit']);
+    Route::get('messaging/inbound', [SMSController::class, 'webhooks']);
+
+    Route::get('/multi-step-form', [MultiFormSubmitController::class, 'showMultiStepForm']);
+    Route::post('/multi-step-submit-form', [MultiFormSubmitController::class, 'submitMultiStepForm']);
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -96,6 +107,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     */
     Route::resource('transactions', TransactionController::class)->except(['create', 'show', 'edit']);
     Route::get('transaction/lists', [TransactionController::class, 'lists'])->name('transactions.list');
+
+ 
 
 });
 

@@ -40,6 +40,21 @@
                         >
                     </Link>
                 </li>
+
+                <li class="navigation-header"><span>SMS Management</span></li>
+
+                <!-- {{ permisions }} -->
+                <li class="nav-item">
+
+                <Link :href="route('sms.index')"
+                        ><i class="bx bx-save"></i
+                        ><span class="menu-title" data-i18n="SMS Manage"
+                            >Manage SMS</span>
+                </Link>
+
+                </li>
+
+
                 <li class="navigation-header"><span>User Management</span></li>
 
                 <!-- {{ permisions }} -->

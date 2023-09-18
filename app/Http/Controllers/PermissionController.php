@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Exception;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
-// use App\Models\Permission;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Filters\PermissionFilter;
 use App\Http\Requests\PermissionRequest;
-use Spatie\Permission\Models\Permission;
+// use Spatie\Permission\Models\Permission;
 use App\Http\Resources\Permissions\PermissionsResource;
 
 class PermissionController extends Controller
@@ -56,6 +56,11 @@ class PermissionController extends Controller
                 ->latest()
                 ->paginate(request('limit') ?? 10)
         );
+
+        // return PermissionsResource::collection(
+        //     Permission::latest()
+        //         ->paginate(request('limit') ?? 10)
+        // );
     }
 
     /**

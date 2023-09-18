@@ -1,0 +1,80 @@
+https://developers.telnyx.com/openapi/messaging/tag/Messages/#tag/Messages/operation/createMessage
+
+
+
+curl -X POST \
+  --header "Content-Type: application/json" \
+  --header "Accept: application/json" \
+  --header "Authorization: Bearer KEY01857DD896838C8A75B0A887F46B90BE_nZVtg3gyIAsear9RVW9q98" \
+  --data '{
+    "from": "+15802001875",
+    "to": "",
+    "text": "",
+    "media_urls" : []
+  }' \
+  https://api.telnyx.com/v2/messages
+
+name: Telnyx
+App Link: https://api.telnyx.com/v2/messages
+api_key: KEY01857DD896838C8A75B0A887F46B90BE_nZVtg3gyIAsear9RVW9q98
+public_key: UG32bb3SIkUOcqdZcQ6w7Tlr34Wn9LQ/Hpp1f3p0z54=
+messaging_profile_id: 4001857d-dc41-48fc-9b62-a7d544220854
+webhook_url: https://a3d9-103-108-146-51.ngrok-free.app/messaging/inbound
+ngrok: ngrok http 8000 --host-header="127.0.0.1:8000"
+
+
+==================================================
+
+
+// 20230615131318
+// http://127.0.0.1:8000/sms
+​
+{
+  "data": {
+    "id": "403188bd-e6bf-4cd5-a3f7-175ed07be510",
+    "record_type": "message",
+    "direction": "outbound",
+    "type": "SMS",
+    "organization_id": "96c42180-0575-4a36-a101-22d99c3d7272",
+    "messaging_profile_id": "4001857d-dc41-48fc-9b62-a7d544220854",
+    "from": {
+      "phone_number": "+15802001875",
+      "carrier": "Telnyx",
+      "line_type": "Wireless"
+    },
+    "to": [
+      {
+        "phone_number": "+14142796339",
+        "status": "queued",
+        "carrier": "ONVOY, LLC - WI",
+        "line_type": "Wireline"
+      }
+    ],
+    "cc": [
+      
+    ],
+    "text": "Hello, world! Testting SMS",
+    "media": [
+      
+    ],
+    "webhook_url": "",
+    "webhook_failover_url": "",
+    "encoding": "GSM-7",
+    "parts": 1,
+    "tags": [
+      
+    ],
+    "cost": {
+      "amount": "0.0040",
+      "currency": "USD"
+    },
+    "received_at": "2023-06-15T07:13:16.258+00:00",
+    "sent_at": null,
+    "completed_at": null,
+    "valid_until": "2023-06-15T08:13:16.258+00:00",
+    "errors": [
+      
+    ]
+  }
+}
+
