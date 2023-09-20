@@ -1,28 +1,11 @@
 <template>
     <div>
-        <label for="name">User Name:</label>
-        <input
-            id="name"
-            type="text"
-            v-model="formData.name"
-            placeholder="Enter your user name"
-        />
+        <label for="name">Select Phone Number:</label>
+        <select name="phone_number" id="phone_number" v-model="formData.phone_number">
+            <option :value="number" v-for="(number, key) in numberList" :key="key">{{ number }}</option>
+        </select>
 
-        <label for="email">Email:</label>
-        <input
-            id="email"
-            type="email"
-            v-model="formData.email"
-            placeholder="Enter your email"
-        />
-
-        <label for="password">Password:</label>
-        <input
-            id="password"
-            type="password"
-            v-model="formData.password"
-            placeholder="Enter your password"
-        />
+        
     </div>
 </template>
 
@@ -33,6 +16,10 @@ export default {
             type: Object,
             required: true,
         },
+        numberList: {
+            type: Array,
+            required: true
+      }
     },
     methods: {
         // Emit the event to indicate the "Next" button is clicked

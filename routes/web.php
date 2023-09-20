@@ -35,6 +35,8 @@ use Inertia\Inertia;
     Route::get('messaging/inbound', [SMSController::class, 'webhooks']);
 
     Route::get('/multi-step-form', [MultiFormSubmitController::class, 'showMultiStepForm']);
+    Route::get('/fetch-number', [MultiFormSubmitController::class, 'fetchNumber']);
+
     Route::post('/multi-step-submit-form', [MultiFormSubmitController::class, 'submitMultiStepForm']);
 
 Route::get('/', function () {

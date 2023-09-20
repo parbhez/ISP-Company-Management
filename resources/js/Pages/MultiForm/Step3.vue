@@ -1,19 +1,11 @@
 <template>
     <div>
-        <label for="address">Address:</label>
-        <textarea
-            id="address"
-            v-model="formData.address"
-            placeholder="Enter your address"
-        ></textarea>
+        <label for="name">Select Plan:</label>
+        <select name="plan" id="plan" v-model="formData.plan">
+            <option :value="plan" v-for="(plan, key) in planList" :key="key">{{ plan }}</option>
+        </select>
 
-        <label for="phone">Phone Number:</label>
-        <input
-            id="phone"
-            type="tel"
-            v-model="formData.phone"
-            placeholder="Enter your phone number"
-        />
+        
     </div>
 </template>
 
@@ -24,6 +16,12 @@ export default {
             type: Object,
             required: true,
         },
+    },
+
+    data(){
+        return {
+            planList: ['$10.00', '$9.99']
+        }
     },
     methods: {
         // Emit the event to indicate the "Next" button is clicked
