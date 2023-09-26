@@ -5,6 +5,7 @@ use App\Http\Controllers\Admins\AdminDashboardCOntroller;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExcelImportController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\MultiFormSubmitController;
 use App\Http\Controllers\PackageController;
@@ -38,6 +39,13 @@ use Inertia\Inertia;
     Route::get('/fetch-number', [MultiFormSubmitController::class, 'fetchNumber']);
 
     Route::post('/multi-step-submit-form', [MultiFormSubmitController::class, 'submitMultiStepForm']);
+    Route::get('/data-encryption', [MultiFormSubmitController::class, 'dataEncryption']);
+
+
+    Route::get('/import-data', [ExcelImportController::class, 'importdata']);
+    Route::post('/store-import-data', [ExcelImportController::class, 'storeImportData'])->name('store.import.data');
+
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
