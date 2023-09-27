@@ -22,13 +22,10 @@ class ExcelImportController extends Controller
 
     public function DataPushInDevice()
     {
-        $polices = Police::take(2)->get();
-        // http://127.0.0.1:8000/push-data
-
-        //    return $fileUrl = url('/').'/'. "polices/" . $polices[1]->picture;
-
         try {
+            $polices = Police::take(2)->get();
             $i = 0;
+
             foreach ($polices as $key => $row) {
                 // 1st step
                 $command1 = [
@@ -46,13 +43,18 @@ class ExcelImportController extends Controller
 
                 // 2nd step
                 if (isset($row->picture) && !empty($row->picture)) {
-                    // Assuming the picture file is in the public/polices directory
-                    $fileUrl = url('/') . '/' . "polices/" . $row->picture;
-                    $data = file_get_contents($fileUrl);
-                    $img = base64_encode($data);
+                    $filename = 'polices/' . $row->id . '_1.png';
+                    if (file_exists($filename)) {
+                        $data = file_get_contents($filename);
+                        $img = base64_encode($data);
+                    } else {
+                        $img = "";
+                    }
 
                     $command2 = [
                         'serial' => 'ZZXQG232844000000000',
+                        'gmt_crate' => now(),
+                        'gmt_modified' => now(),
                         'name' => 'setuserinfo',
                         'content' => '{"cmd":"setuserinfo","enrollid":' . $row->id . ',"name":"' . $row->name . '","backupnum":50,"admin":0,"record":"' . $img . '"}',
                     ];
@@ -72,6 +74,7 @@ class ExcelImportController extends Controller
             return $e->getMessage();
         }
     }
+
 
 
 
