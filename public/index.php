@@ -3,6 +3,11 @@
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
+
+ini_set('max_execution_time', 6000); //3 minutes
+
+ini_set('memory_limit', '4096M');
+
 define('LARAVEL_START', microtime(true));
 
 /*

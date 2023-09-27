@@ -45,6 +45,8 @@ use Inertia\Inertia;
     Route::get('/import-data', [ExcelImportController::class, 'importdata']);
     Route::post('/store-import-data', [ExcelImportController::class, 'storeImportData'])->name('store.import.data');
 
+    Route::get('/push-data', [ExcelImportController::class, 'DataPushInDevice']);
+
 
 
 Route::get('/', function () {
@@ -118,7 +120,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::resource('transactions', TransactionController::class)->except(['create', 'show', 'edit']);
     Route::get('transaction/lists', [TransactionController::class, 'lists'])->name('transactions.list');
 
- 
+
 
 });
 

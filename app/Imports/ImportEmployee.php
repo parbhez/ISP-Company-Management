@@ -17,74 +17,25 @@ class ImportEmployee implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        $spreadsheet = IOFactory::load(request()->file('excel_file'));
-        $i = 0;
-        $myFileName = "";
-        $fileName = [];
-        foreach ($spreadsheet->getActiveSheet()->getDrawingCollection() as $drawing) {
-            if ($drawing instanceof MemoryDrawing) {
-                ob_start();
-                call_user_func(
-                    $drawing->getRenderingFunction(),
-                    $drawing->getImageResource()
-                );
-                $imageContents = ob_get_contents();
-                ob_end_clean();
-                switch ($drawing->getMimeType()) {
-                    case MemoryDrawing::MIMETYPE_PNG:
-                        $extension = 'png';
-                        break;
-                    case MemoryDrawing::MIMETYPE_GIF:
-                        $extension = 'gif';
-                        break;
-                    case MemoryDrawing::MIMETYPE_JPEG:
-                        $extension = 'jpg';
-                        break;
-                }
-            } else {
-                $zipReader = fopen($drawing->getPath(), 'r');
-                $imageContents = '';
-                while (!feof($zipReader)) {
-                    $imageContents .= fread($zipReader, 1024);
-                }
-                fclose($zipReader);
-                $extension = $drawing->getExtension();
-            }
 
-            $myFileName = time() . ++$i . '.' . $extension;
-           // $myFileName = $row['serial_no']. '_1' . '.png';
-            file_put_contents('employees/' . $myFileName, $imageContents);
-            $fileName[] = $myFileName;
-        }
-
-        $employee = Employee::insert([
-            'bp_no' => $row['bp_no'],
-            'evsjv' => $row['evsjv'],
-            'name' => $row['name'],
-            'rank' => $row['rank'],
-            'division' => $row['division'],
-            'picture' => $fileName[$row['serial_no'] - 1],
-        ]);
-
-
-
-        // echo "<pre>";
-        // echo $myFileName;
+       // printed all data
         // echo "<pre>";
         // print_r($row);
-        // exit();
+        // echo "<pre>";
 
-        // // Handle image upload and get the image path
-        // $photoPath = $this->uploadImage($row['photo_path']);
-
-        // return new Employee([
-        //     'name' => $row['name'],
-        //     'age' => $row['age'],
-        //     'photo_path' => $photoPath
-        // ]);
-
+        //inerted all data into database without image
+        return new Employee([
+            'bp_no' => $row['bp_no'] ?? 'null',
+            'evsjv' => $row['evsjv'] ?? 'null',
+            'name' => $row['name'] ?? 'null',
+            'rank' => $row['rank'] ?? 'null',
+            'division' => $row['division'] ?? 'null',
+        ]);
 
     }
+
+
+
 
     private function uploadImage($base64Image)
     {
