@@ -9,7 +9,7 @@ class Employee extends Model
 {
     use HasFactory;
 
-    protected $table = 'employees';
+    protected $table = 'employee';
     //We want to insert all columns values
     protected $guarded = [];
 }

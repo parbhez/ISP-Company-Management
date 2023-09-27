@@ -118,6 +118,9 @@ class ExcelImportController extends Controller
     // }
     public function storeImportData(Request $request)
     {
+
+        $imageFilenames = []; // Initialize imageFilenames
+
         $file = $request->file('excel_file');
 
         // Ensure the file is an Excel file
@@ -132,8 +135,7 @@ class ExcelImportController extends Controller
             // Load the Excel file
             $spreadsheet = IOFactory::load($file);
 
-            $imageFilenames = [];
-            $maxId = Police::max('id') ?? 0;
+            $maxId = Police::max('employee_id') ?? 0;
 
             foreach ($spreadsheet->getActiveSheet()->getDrawingCollection() as $i => $drawing) {
                 $zipReader = fopen($drawing->getPath(), 'r');
@@ -163,21 +165,30 @@ class ExcelImportController extends Controller
 
             // Update Employee model with the image filenames
             foreach ($imageFilenames as $index => $filename) {
-                $employee = Employee::find($index + 1);
+                $employee = Employee::where('employee_id', $index + 1)->first();
+
                 if ($employee) {
-                    $employee->update(['picture' => $filename]);
+                    // Update the picture for the employee
+                    Employee::where('employee_id', $index + 1)->update(['picture' => $filename]);
+                    $employee = Employee::where('employee_id', $index + 1)->first();
+                    // Create a Police record
                     Police::create([
-                        'bp_no' => $employee->bp_no,
-                        'evsjv' => $employee->evsjv,
-                        'name' => $employee->name,
-                        'rank' => $employee->rank,
-                        'division' => $employee->division,
+                        'employee_name' => $employee->employee_name,
+                        'employee_phone' => $employee->employee_phone,
+                        'employee_address' => $employee->employee_address,
+                        'employee_post' => $employee->employee_post,
+                        'employee_access' => $employee->employee_access,
+                        'employee_status' => $employee->employee_status,
+                        'employee_rfid' => $employee->employee_rfid,
+                        'user_id' => $employee->user_id,
+                        'emp_id' => $employee->emp_id,
                         'picture' => $employee->picture,
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
                 }
             }
+
 
             // Move files to the police folder
             $this->moveFilesToPoliceFolder($imageFilenames);

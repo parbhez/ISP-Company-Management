@@ -25,11 +25,15 @@ class ImportEmployee implements ToModel, WithHeadingRow
 
         //inerted all data into database without image
         return new Employee([
-            'bp_no' => $row['bp_no'] ?? 'null',
-            'evsjv' => $row['evsjv'] ?? 'null',
-            'name' => $row['name'] ?? 'null',
-            'rank' => $row['rank'] ?? 'null',
-            'division' => $row['division'] ?? 'null',
+            'employee_name' => $row['employee_name'] ?? 'null',
+            'employee_phone' => $row['employee_phone'] ?? 'null',
+            'employee_address' => $row['employee_address'] ?? 'null',
+            'employee_post' => $row['employee_post'] ?? 'null',
+            'employee_access' => $row['employee_access'] ?? '["5","6"]',
+            'employee_status' => $row['employee_status'] ?? '1',
+            'employee_rfid' => $row['employee_rfid'] ?? 'null',
+            'user_id' => $row['user_id'] ?? 2,
+            'emp_id' => $row['emp_id'] ?? 'null',
         ]);
 
     }
